@@ -39,7 +39,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 
-class picasso():
+class Picasso():
 	"""
 	Create object for fitting Picasso model
 	Returns: Picasso model object
