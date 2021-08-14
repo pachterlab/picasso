@@ -1,4 +1,4 @@
-name: mcml3.7
+name: env3.7
 channels:
   - conda-forge
   - bioconda
