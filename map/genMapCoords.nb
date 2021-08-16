@@ -26,7 +26,7 @@ Cell[BoxData[
      RowBox[{"EdgeDetect", "[", 
       RowBox[{
       "Import", "[", 
-       "\"\</Users/tarachari/Desktop/Screen Shot 2021-06-08 at 8.11.27 AM.png\
+       "\"\<./Map.png\
 \>\"", "]"}], "]"}], ",", "1"}], "]"}]}], ";"}]], "Input",
  CellChangeTimes->{{3.83215393396387*^9, 
   3.832153983908327*^9}},ExpressionUUID->"49807c12-cf22-468c-ac6b-\
