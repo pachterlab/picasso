@@ -1,5 +1,5 @@
-# picasso
-Code to generate Picasso embeddings of any input matrix as described in .... Picasso maps the points of an input matrix to user-defined, n-dimensional shape coordinates while minimizing reconstruction error using an autoencoder neural network structure. We demonstrate its application to single-cell gene expression matrices.
+# Picasso
+Code to generate Picasso embeddings of any input matrix as described in .... Picasso maps the points of an input matrix to user-defined, n-dimensional shape coordinates while minimizing reconstruction error using an autoencoder neural network structure. In the sample code Picasso is applied to single-cell gene expression embedding. 
 
 <p align="center">
   <img src="https://github.com/pachterlab/picasso/blob/main/elExample.png" width="80%" height="80%">
@@ -11,7 +11,7 @@ Getting Started
 
 Examples for running Picasso can be found in the examplePicasso.ipynb. This can be run from Google Colab. Just click on the [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com) symbol.
 
-An intro to using Colab can be found [here](https://colab.research.google.com). Briefly, run each code cell by selecting the cell and executing Command/Ctrl+Enter. Code cells can be edited by simply clicking on the cell to start typing.
+An introduction to using Colab can be found [here](https://colab.research.google.com). Briefly, run each code cell by selecting the cell and executing Command/Ctrl+Enter. Code cells can be edited by simply clicking on the cell to start typing.
 
 
 To run Picasso on your own machine
