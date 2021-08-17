@@ -9,7 +9,7 @@ Code to generate Picasso embeddings of any input matrix as described in .... Pic
 Getting Started
 ------------
 
-Examples for running Picasso can be found in the examplePicasso.ipynb. This can be run from Google Colab. Just click on the [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com) symbol.
+Examples for running Picasso can be found in [examplePicasso.ipynb](https://github.com/pachterlab/picasso/blob/main/examplePicasso.ipynb). The notebook can be run in Google Colab by clicking on the [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/pachterlab/picasso/blob/main/examplePicasso.ipynb) symbol.
 
 An introduction to using Colab can be found [here](https://colab.research.google.com). Briefly, run each code cell by selecting the cell and executing Command/Ctrl+Enter. Code cells can be edited by simply clicking on the cell to start typing.
 
