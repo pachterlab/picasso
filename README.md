@@ -1,5 +1,5 @@
 # Picasso
-Code to generate Picasso embeddings of any input matrix as described in .... Picasso maps the points of an input matrix to user-defined, n-dimensional shape coordinates while minimizing reconstruction error using an autoencoder neural network structure. In the sample code Picasso is applied to single-cell gene expression embedding. 
+Code to generate Picasso embeddings of any input matrix. Picasso maps the points of an input matrix to user-defined, n-dimensional shape coordinates, while minimizing reconstruction error using an autoencoder neural network structure. In the sample code Picasso is applied to single-cell gene expression counts. 
 
 <p align="center">
   <img src="https://github.com/pachterlab/picasso/blob/main/elExample.png" width="80%" height="80%">
