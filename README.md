@@ -13,6 +13,7 @@ Examples for running Picasso can be found in [examplePicasso.ipynb](https://gith
 
 An introduction to using Colab can be found [here](https://colab.research.google.com). Briefly, run each code cell by selecting the cell and executing Command/Ctrl+Enter. Code cells can be edited by simply clicking on the cell to start typing.
 
+Elephant coordinates generated from [Mayer et al. 2010](https://aapt.scitation.org/doi/full/10.1119/1.3254017).
 
 To run Picasso on your own machine
 ------------
