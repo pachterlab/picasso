@@ -124,13 +124,16 @@ class Picasso():
 
 		# Convert dists to numpy
 		np_dists = bound_dists.detach().cpu().numpy()
+		
+		if frac != 0.0:
+			# Use scipy.optimize.linear_sum_assignment to find matches
+			row_ind, col_ind = linear_sum_assignment(np_dists)
 
-		# Use scipy.optimize.linear_sum_assignment to find matches
-		row_ind, col_ind = linear_sum_assignment(np_dists)
-
-		# Make boolean numpy array
-		bools = np.full((np_dists.shape[0],np_dists.shape[1]), False)
-		bools[row_ind,col_ind] = True
+			# Make boolean numpy array
+			bools = np.full((np_dists.shape[0],np_dists.shape[1]), False)
+			bools[row_ind,col_ind] = True
+		else:
+			bools = np.full((np_dists.shape[0],np_dists.shape[1]), False)
 
 		# Import boolean array to torch
 
