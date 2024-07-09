@@ -212,7 +212,7 @@ class Picasso():
 
 
 
-	def fit(self, X, coords, frac = 0.8, silent = False, ret_loss = False, summ = False):
+	def fit(self, X, coords, frac = 0.8, silent = False, ret_loss = False, summ = False, print_interval = 10):
 		"""
 		Parameters:
 		X : Input data as numpy array (obs x features)
@@ -221,6 +221,7 @@ class Picasso():
 		silent : Print average loss per epoch (default is False)
 		ret_loss : Boolean to return loss values over epochs
 		summ : Boolean to return summary of neural network
+		print_interval : Integer specifying the interval (in epochs) at which to print the epoch number and average loss (default is 10)
 
 		Returns :
 		Latent space representation of X
@@ -267,7 +268,7 @@ class Picasso():
 
 					optimizer.step()
 
-			if silent != True:
+			if (silent != True) and (e % print_interval == 0):
 				print('====> Epoch: {} Average loss: {:.4f}'.format(e, allLosses[-1].item() / len(X)))
 
 			loss_values.append([allLosses[i].item() / len(X) for i in range(len(allLosses))])
@@ -292,6 +293,7 @@ class Picasso():
 		trainFrac : Fraction of X to use for training
 		frac : Fraction of Shape-Aware cost in loss calculation (default is 0.8)
 		silent : Print average loss per epoch (default is False)
+  		print_interval : Integer specifying the interval (in epochs) at which to print the epoch number and average loss (default is 10)
 
 		Returns :
 		Loss values from training and validation batches of X
@@ -354,7 +356,7 @@ class Picasso():
 
 			test_losses = self.test(model, X_test, coords, frac = frac, silent = silent)
 			
-			if silent != True:
+			if (silent != True) and (e % print_interval == 0):
 				print('====> Epoch: {} Average loss: {:.4f}'.format(e, allLosses[-1] / len(X_train)))
 
 			loss_values.append([allLosses[i].item() / len(X_train) for i in range(len(allLosses))])
