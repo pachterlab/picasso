@@ -8,6 +8,7 @@ import random
 from torchsummary import summary
 from collections import Counter
 import itertools
+import os
 
 from scipy.optimize import linear_sum_assignment
 
@@ -212,7 +213,8 @@ class Picasso():
 
 
 
-	def fit(self, X, coords, frac = 0.8, silent = False, ret_loss = False, summ = False, print_interval = 10):
+	def fit(self, X, coords, frac = 0.8, silent = False, ret_loss = False, summ = False, print_interval = 10,
+		save_ckpt = True, ckpt_name_to_save ='ckpt.pth', start_from_ckpt = False, ckpt_name_to_use = 'ckpt.pth'):
 		"""
 		Parameters:
 		X : Input data as numpy array (obs x features)
@@ -222,15 +224,40 @@ class Picasso():
 		ret_loss : Boolean to return loss values over epochs
 		summ : Boolean to return summary of neural network
 		print_interval : Integer specifying the interval (in epochs) at which to print the epoch number and average loss (default is 10)
-
+		save_ckpt : Boolean to save model and optimizer parameters after training (default is True)
+		ckpt_name_to_save : File name where the checkpoint is saved (default is 'ckpt.pth')
+		start_from_ckpt : Boolean to start from an existing checkpoint (default is False)
+		ckpt_name_to_use : Checkpoint file name to use when starting from a checkpoint (default is 'ckpt.pth')
+		
 		Returns :
 		Latent space representation of X
 		"""
 
+		# Create the checkpoints folder if it doesn't exist
+		os.makedirs('checkpoints', exist_ok=True)
+
+		# Update the checkpoint paths to include the 'checkpoints' directory
+		ckpt_name_to_save = os.path.join('checkpoints', ckpt_name_to_save)
+		ckpt_name_to_use = os.path.join('checkpoints', ckpt_name_to_use)
+		
+			
 		iters_per_epoch = int(np.ceil(X.shape[0] / self.batch_size))
 
 		model = autoencoder(X.shape[1], self.n_hidden, self.n_latent).to(device)
 		optimizer = torch.optim.Adam(model.parameters(), lr=self.lr, weight_decay=self.weight_decay)
+
+		if start_from_ckpt:
+
+			# Ensure the checkpoint file exists
+			if not os.path.exists(ckpt_name_to_use):
+				raise FileNotFoundError(f"The checkpoint file '{ckpt_name_to_use}' does not exist.")
+		
+			# Load the checkpoint
+			checkpoint = torch.load(ckpt_name_to_use)
+		
+			# Load the parameters of the model and optimizer
+			model.load_state_dict(checkpoint['model_state_dict'])
+			optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
 
 		#Print model summary
 		if summ:
@@ -273,6 +300,12 @@ class Picasso():
 
 			loss_values.append([allLosses[i].item() / len(X) for i in range(len(allLosses))])
 
+			
+		# Save a checkpoint (weights of the network and parameters of the optimizer) in the 'checkpoints' folder
+		if save_ckpt:
+			torch.save({'model_state_dict': model.state_dict(),
+				    'optimizer_state_dict': optimizer.state_dict(),},
+				   ckpt_name_to_save)
 
 
 		model.eval()
@@ -285,7 +318,7 @@ class Picasso():
 			return z.detach().cpu().numpy()
 
 
-	def trainTest(self,X,coords, trainFrac = 0.8, frac = 0.8, silent = False):
+	def trainTest(self,X,coords, trainFrac = 0.8, frac = 0.8, silent = False, print_interval = 10):
 		"""
 		Parameters:
 		X : Input data as numpy array (obs x features)
